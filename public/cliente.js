@@ -38,15 +38,13 @@ function draw() {
 function mousePressed (){
     const elemento = {
         x: mouseX,
-        y: mousey,
+        y: mouseY, // debe ser mouseY no mousey
         r: r,
         g: g,
         b: b,
         size
-
     };
-
-    socket .emit ('enviar-elemento', elemento);
+    socket.emit ('enviar-elemento', elemento);
 }
 
 function mouseDragged(){
@@ -57,7 +55,7 @@ function mouseDragged(){
         g: g,
         b: b,
         size
-
+        // Acá debes agregar el id, fíjate en el paso correspondiente
     };
     socket .emit ('enviar-cursor', elemento);
 }

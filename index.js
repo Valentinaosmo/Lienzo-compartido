@@ -1,11 +1,7 @@
-const exp = require('constants');
-const { Socket } = require('dgram');
-const express = require ('express');
-const http =require ('http');
-const { disconnect } = require('process');
-const socketIO= require('socket.io') 
-
-
+// revisar bien la importación automática ahí tenías cosas raras
+const express = require('express');
+const http = require('http');
+const socketIO = require('socket.io');
 
 const app = express ();
 const server = http.createServer(app);
@@ -14,18 +10,18 @@ const io = socketIO(server);
 
 app.use(express.static(__dirname +  '/public'));
 
-io.on('connection', (Socket) => {
+io.on('connection', (socket) => { // debe ser minúscula
     console.log('un cliente se ha conectado');
     socket.on('enviar-elemento', (elemento) => {
 
         io.emit('elemento-recibido', elemento);
      });
 
-    Socket.on('enviar-cursor' , (elemento) => {
+     socket.on('enviar-cursor' , (elemento) => {
         io.emit('cursor-recibido', elemento);
      });
 
-    Socket.on('disconnected' , () => {
+     socket.on('disconnected' , () => {
         console.log('un cliente se ha desconectado');
 
     });
